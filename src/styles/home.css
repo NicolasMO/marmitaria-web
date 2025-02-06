@@ -1,0 +1,58 @@
+h2 {
+    margin-bottom: 50px;
+}
+
+.home-container {
+    padding: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    height:65vh;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.home-container-bebidas{
+    height: 90vh;
+}
+
+.home-cards {
+    padding-inline:10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.home-cards-bebida {
+    margin-bottom: 10px;
+    
+}
+
+.marmita-row,
+.bebida-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    padding: 50px;
+    height: 30vh;
+}
+
+.bebida-row {
+    row-gap: 20px;
+    justify-content: space-around;
+}
+
+.card {
+    background-color: #E7E7E7; 
+    margin-bottom: 15px;
+    width: 100%; 
+    height: 300px;
+    border: none; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
