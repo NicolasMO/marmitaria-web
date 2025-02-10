@@ -1,38 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MarmitaCard from "../components/products/MarmitaCard";
 import BebidaCard from "../components/products/BebidaCard";
 import { Container, Row, Col } from "react-bootstrap"
+import useProdutos from "../hooks/useProdutos"
 import "../styles/home.css"
 
 function Home() {
-    const [marmitas, setMarmitas] = useState([]);
-    const [bebidas, setBebidas] = useState([]);
-
-    // Função para buscar produtos da API
-    useEffect(() => {
-        // Simulação de fetch na API (substitua pelo seu código real de fetch)
-        setMarmitas([
-            { id: 1, nome: 'Marmita Pequena', preco: 15, descricao: 'Escolha 1 proteína e 2 carboidratos', imagem: 'marmita1.jpg' },
-            { id: 2, nome: 'Marmita Grande', preco: 25, descricao: 'Escolha 2 proteínas e 3 carboidratos', imagem: 'marmita2.jpg' }
-        ]);
-        setBebidas([
-            { id: 1, nome: 'Refrigerante', preco: 5, imagem: 'refri1.jpg' },
-            { id: 2, nome: 'Água', preco: 2, imagem: 'agua1.jpg' },
-            { id: 3, nome: 'Suco de Laranja', preco: 6, imagem: 'suco1.jpg' },
-            { id: 4, nome: 'Suco de Uva', preco: 6, imagem: 'suco2.jpg' },
-            { id: 5, nome: 'Cerveja', preco: 8, imagem: 'cerveja1.jpg' }
-        ]);
-    }, []);
+    
+    const { marmitas, bebidas } = useProdutos();
 
     return (
         <main>
             <Container className="home-container">
                 <section>
-                    <h2>Escolha sua marmita</h2>
+                    <h2 class="text-center pt-5">Escolha sua marmita</h2>
                     <div className="home-cards">
-                        <Row className="marmita-row">
+                        <Row className="marmita-row d-flex justify-content-center">
                             {marmitas.map(marmita => (
-                                <Col key={marmita.id} md={6} lg={4}>
+                                <Col key={marmita.id} md={6} lg={4} className="d-flex justify-content-center" style={{ marginRight: "20px", marginLeft: "20px" }}>
                                     <MarmitaCard marmita={marmita}/>
                                 </Col>
                             ))}
@@ -43,11 +28,11 @@ function Home() {
 
             <Container className="home-container home-container-bebidas">
                 <section>
-                    <h2>Escolha sua bebida</h2>
+                    <h2 class="text-center pt-5">Escolha sua bebida</h2>
                     <div className="home-cards home-cards-bebida">
-                        <Row className="bebida-row">
+                        <Row className="bebida-row d-flex justify-content-center">
                             {bebidas.map(bebida => (
-                                <Col key={bebida.id} md={6} lg={4}>
+                                <Col key={bebida.id} md={6} lg={4} className="d-flex justify-content-center mb-4" style={{ marginRight: "-20px", marginLeft: "-20px" }}>
                                     <BebidaCard bebida={bebida}/>
                                 </Col>
                             ))}
