@@ -1,7 +1,14 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function MarmitaCard({ marmita }) {
+    const navigate = useNavigate();
+
+    const handleMontarClick = () => {
+        // Navega para a página "/marmita", passando o tipo de marmita no state
+        navigate('/marmita', { state: { tipoId: marmita.id } });
+    };
     const descricao =
         marmita.tipo === "MARMITA_PEQUENA"
             ? (
@@ -17,7 +24,7 @@ function MarmitaCard({ marmita }) {
                     <p>Escolha 2 proteínas, 3 carboidratos e 4 acompanhantes.</p>
                     <p>Serve 1-2 pessoas.</p>
                 </>
-            );
+            ); 
 
     return (
         <Card className="card-marmita">
@@ -25,7 +32,7 @@ function MarmitaCard({ marmita }) {
             <Card.Body>
                 <Card.Title>{marmita.nome} - R$ {marmita.preco.toFixed(2)}</Card.Title>
                 <Card.Text>{descricao}</Card.Text>
-                <Button variant="success">Montar</Button>
+                <Button variant="success" onClick={handleMontarClick}>Montar</Button>
             </Card.Body>
         </Card>
     );

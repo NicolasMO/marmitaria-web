@@ -29,10 +29,22 @@ class ApiService {
                 return Promise.reject(error);
             }
         );
-    }
+    };
 
-    listarProdutos() {
+    produtosListar() {
         return this.axiosInstance.get(apiConfig.produtosEndpoint);
+    };
+
+    ingredientesListar() {
+        return this.axiosInstance.get(apiConfig.ingredientesEndpoint);
+    };
+
+    ingredientesListarLimites(produtoId) {
+        return this.axiosInstance.get(`${apiConfig.ingredientesLimitesEndpoint}/${produtoId}`);
+    };
+
+    carrinhoAdicionarItem(data) {
+        return this.axiosInstance.post(`${apiConfig.carrinhoAdicionarItem}`, data)
     }
 }
 
