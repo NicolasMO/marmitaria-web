@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import "./styles/global.css"
 import "./styles/home.css"
 import "./styles/buildmarmita.css"

@@ -7,9 +7,8 @@ function MarmitaCard({ marmita }) {
 
     const handleMontarClick = () => {
         // Navega para a página "/marmita", passando o tipo de marmita no state
-        navigate('/marmita', { state: { tipo: marmita.tipo } });
+        navigate('/marmita', { state: { tipoId: marmita.id } });
     };
-
     const descricao =
         marmita.tipo === "MARMITA_PEQUENA"
             ? (

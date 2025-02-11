@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import Home from "./pages/Home";
 import BuildMarmita from "./pages/BuildMarmita";
@@ -24,9 +25,22 @@ function Layout() {
 
 function App() {
   return (
-    <Router>
-      <Layout />
-    </Router>
+    <>
+      <ToastContainer 
+         position="bottom-right" 
+         autoClose={3000} 
+         hideProgressBar={false} 
+         newestOnTop={false} 
+         closeOnClick 
+         rtl={false} 
+         pauseOnFocusLoss 
+         draggable 
+         pauseOnHover 
+      />
+      <Router>
+        <Layout />
+      </Router>
+    </>
   )
 }
 

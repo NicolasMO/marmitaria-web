@@ -6,7 +6,7 @@ const useProdutos = () => {
     const [bebidas, setBebidas] = useState([]);
 
     useEffect(() => {
-        apiService.listarProdutos()
+        apiService.produtosListar()
             .then(response => {
                 const marmitasData = response.data.filter(produto => produto.tipo === "MARMITA_PEQUENA" || produto.tipo === "MARMITA_GRANDE");
                 const bebidasData = response.data.filter(produto => produto.tipo === "BEBIDA");

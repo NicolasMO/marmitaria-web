@@ -1,52 +1,52 @@
 import React from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import useBuildMarmita from "../hooks/useBuildMarmita";
+
 
 function BuildMarmita() {
     const location = useLocation();
-    const navigate = useNavigate();
-    const { tipo } = location.state || {};
+    const { tipoId } = location.state || {};
+    
 
-    const proteinas = ["Peito de frango assado", "Carne trinchada", "Omelete c/ frango e queijo", "Carne trinchada", "Omelete c/ frango e queijo"];
-    const carboidratos = ["Arroz branco", "Baião", "Feijão Carioca", "Macarrão ao alho e óleo", "Arroz integral"];
-    const complementos = ["Batata cozida", "Vinagrete", "Repolho refogado", "Batata doce cozida", "Batata cozida", "Batata cozida", "Vinagrete", "Repolho refogado", "Batata doce cozida", "Batata cozida"];
-
-    const handleVoltar = () => {
-        navigate('/');
-    };
-
-    const handleMontarMarmita = () => {
-        console.log("marmita montada");
-    };
+    const { proteinas, carboidratos, complementos, limiteProteinas, limiteCarboidratos, limiteComplementos,
+            selectedProteinas, selectedCarboidratos, selectedComplementos, handleSelectIngredientes, 
+            handleVoltar, handleMontarMarmita } = useBuildMarmita(tipoId);
 
     return (
         <Container>
             <h1 className="text-center pt-5 mb-4">Monte sua Marmita</h1>
             <Row className="mb-4 px-4">
                 <Col md={4}>
-                    <h3>PROTEÍNAS - MAX: 1</h3>
+                    <h3>PROTEÍNAS - MAX: {limiteProteinas}</h3>
                     <div className="p-3 build-marmita-box user-select-none">
                         <Form>
-                            {proteinas.map((item, index) => (
-                                <Form.Check
-                                    type="checkbox"
-                                    key={index}
-                                    label={item}
-                                    id={`proteina-${index}`}
+                            {proteinas.map(proteina => (
+                                <Form.Check 
+                                    key={proteina.id}
+                                    type="checkbox"    
+                                    label={proteina.nome}
+                                    id={proteina.id}
+                                    checked={selectedProteinas.includes(proteina.id)}
+                                    onChange={() => handleSelectIngredientes(proteina.id, proteina.categoria)}
+                                    disabled={selectedProteinas.length >= limiteProteinas && !selectedProteinas.includes(proteina.id)}
                                     className="mb-2"
                                 />
                             ))}
                         </Form>
                     </div>
-                    <h3 className="build-marmita-h3">CARBOIDRATOS - MAX: 2</h3>
+                    <h3 className="build-marmita-h3">CARBOIDRATOS - MAX: {limiteCarboidratos}</h3>
                     <div className="p-3 build-marmita-box user-select-none">
                     <Form>
-                        {carboidratos.map((item, index) => (
+                        {carboidratos.map(carboidrato => (
                             <Form.Check 
+                                key={carboidrato.id}
                                 type="checkbox"
-                                key={index}
-                                label={item}
-                                id={`carboidrato-${index}`}
+                                label={carboidrato.nome}
+                                id={carboidrato.id}
+                                checked={selectedCarboidratos.includes(carboidrato.id)}
+                                onChange={() => handleSelectIngredientes(carboidrato.id, carboidrato.categoria)}
+                                disabled={selectedCarboidratos.length >= limiteCarboidratos && !selectedCarboidratos.includes(carboidrato.id)}
                                 className="mb-2"
                             />
                         ))}
@@ -55,15 +55,18 @@ function BuildMarmita() {
                 </Col>
 
                 <Col md={4}>
-                    <h3>COMPLEMENTOS - MAX: 2</h3>
+                    <h3>COMPLEMENTOS - MAX: {limiteComplementos}</h3>
                     <div className="p-3 build-marmita-box complementos-box user-select-none">
                         <Form>
-                            {complementos.map((item, index) => (
+                            {complementos.map(complemento => (
                                 <Form.Check 
-                                    type="checkbox"    
-                                    key={index}
-                                    label={item}
-                                    id={`complemento-${index}`}
+                                    key={complemento.id}
+                                    type="checkbox"
+                                    label={complemento.nome}
+                                    id={complemento.id}
+                                    checked={selectedComplementos.includes(complemento.id)}
+                                    onChange={() => handleSelectIngredientes(complemento.id, complemento.categoria)}
+                                    disabled={selectedComplementos.length >= limiteComplementos && !selectedComplementos.includes(complemento.id)}
                                     className="mb-2"
                                 />
                             ))}
