@@ -11,7 +11,7 @@ function Home() {
 
     return (
         <main>
-            <Container className="home-container">
+            <Container>
                 <section>
                     <h2 class="text-center pt-5">Escolha sua marmita</h2>
                     <div className="home-cards">
@@ -26,7 +26,7 @@ function Home() {
                 </section>
             </Container>
 
-            <Container className="home-container home-container-bebidas">
+            <Container>
                 <section>
                     <h2 class="text-center pt-5">Escolha sua bebida</h2>
                     <div className="home-cards home-cards-bebida">

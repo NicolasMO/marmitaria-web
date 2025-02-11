@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import BuildMarmita from "./pages/BuildMarmita";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
-import "./styles/global.css"
+
 
 function Layout() {
   const location = useLocation();
