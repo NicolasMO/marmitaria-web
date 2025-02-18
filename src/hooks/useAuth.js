@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import apiService from "../services/apiService";
@@ -5,14 +6,6 @@ import apiService from "../services/apiService";
 export default function useAuth() {
     const navigate = useNavigate();
     const [token, setToken] = useState(localStorage.getItem("token") || null);
-
-    useEffect(() => {
-        if (token) {
-            localStorage.setItem("token", token);
-        } else {
-            localStorage.removeItem("token");
-        }
-    }, [token]);
 
     const login = async (email, senha) => {
         try {
@@ -24,16 +17,34 @@ export default function useAuth() {
             localStorage.setItem("usuarioNome", data.usuarioNome);
             localStorage.setItem("usuarioCarrinho", data.carrinhoId);
             localStorage.setItem("usuarioId", data.usuarioId);
+            
+            toast.success("Usuário logado com sucesso.")
         } catch (error) {
-            console.log("Erro no login: ", error)
+            if (error) {
+                const errorMessage = error.response?.data?.message || "Ocorreu um erro.";
+                console.log(errorMessage)
+                console.log(error)
+                toast.error("Usuário ou senha inválidos.")
+            } else {
+                toast.error("Ocorreu um erro.")
+            }
         }
     };
-
+    
     const logout = () => {
         localStorage.clear();
         setToken(null);
         navigate("/");
-      };
+        window.location.reload();
+    };
 
-    return { login, isAuthenticated: !!token, logout }
+    useEffect(() => {
+        if (token) {
+            localStorage.setItem("token", token);
+        } else {
+            localStorage.removeItem("token");
+        }
+    }, [token]);
+    
+    return { login, isAuthenticated: !!token, logout, token }
 }

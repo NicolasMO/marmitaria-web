@@ -105,7 +105,7 @@ const useBuildMarmita = (tipoId) => {
     };
 
     return { proteinas, carboidratos, complementos, limiteProteinas, limiteCarboidratos, limiteComplementos, selectedProteinas, selectedCarboidratos, selectedComplementos, 
-             handleSelectIngredientes, handleMontarMarmita };
+             handleVoltar, handleSelectIngredientes, handleMontarMarmita };
 }
 
 export default useBuildMarmita;

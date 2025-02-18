@@ -4,7 +4,7 @@ import apiConfig from "./apiConfig";
 class ApiService {
     constructor() {
         this.axiosInstance = axios.create({
-            baseUrl: apiConfig.baseUrl
+            baseURL: apiConfig.baseUrl
         });
 
         // Intercepta requisições para adicionar token de autenticação
@@ -12,7 +12,7 @@ class ApiService {
             config => {
                 const token = localStorage.getItem('token');
                 if (token) {
-                    config.headers.Authorization = `Bearer ${token}`;
+                    config.headers['Authorization'] = `Bearer ${token}`;
                 }
                 return config;
             },

@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import "./Header.css";
 
 function Header() {
-    const { login, logout, isAuthenticated } = useAuth();
+    const { login, logout, isAuthenticated, token } = useAuth();
 
     const [email, setEmail] = React.useState("");
     const [senha, setSenha] = React.useState("");
@@ -13,6 +13,8 @@ function Header() {
         e.preventDefault();
         try {
           await login(email, senha);
+          setEmail("");
+          setSenha("");
         } catch (error) {
           console.error("Erro no login:", error);
         }
@@ -27,7 +29,7 @@ function Header() {
                 <Nav className="profile-nav">
                     {isAuthenticated ? (
                         <>
-                            <span className="text-white">Bem-vindo, Nicolas</span>
+                            <span className="text-white">Bem-vindo, {localStorage.getItem("usuarioNome")}</span>
                             <Nav.Link href="/perfil">Meu Perfil</Nav.Link>
                             <Button variant="danger" onClick={logout}>Sair</Button>
                         </>
