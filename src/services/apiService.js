@@ -31,6 +31,10 @@ class ApiService {
         );
     };
 
+    authLogin(loginRequest) {
+        return this.axiosInstance.post(apiConfig.authEndpoint, loginRequest);
+    };
+
     produtosListar() {
         return this.axiosInstance.get(apiConfig.produtosEndpoint);
     };
@@ -44,7 +48,7 @@ class ApiService {
     };
 
     carrinhoAdicionarItem(data) {
-        return this.axiosInstance.post(`${apiConfig.carrinhoAdicionarItem}`, data)
+        return this.axiosInstance.post(`${apiConfig.carrinhoAdicionarItem}`, data);
     }
 }
 
