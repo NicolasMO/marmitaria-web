@@ -32,12 +32,12 @@
 }
 
 .card-marmita .card-img-top {
-    width: 345px;
+    width: 100%;
     height: 245px;
 }
 
 .card-bebida .card-img-top {
-    width: 264px;
+    width: 100%;
     height: 243px;
 }
 

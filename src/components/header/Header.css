@@ -36,3 +36,19 @@
     color: white;
     margin-bottom: 10px;
 }
+
+.profile-nav form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.profile-nav form .form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.profile-nav form .btn {
+    width: 100%;
+}
