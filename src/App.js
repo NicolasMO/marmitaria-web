@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import BuildMarmita from "./pages/BuildMarmita";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import CarrinhoSidebar from "./components/cart/CarrinhoSidebar";
 
 
 function Layout() {
@@ -13,6 +14,7 @@ function Layout() {
   return (
     <>
     {location.pathname !== "/cadastro" && <Header />}
+    {location.pathname !== "/cadastro" && <CarrinhoSidebar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/marmita" element={<BuildMarmita />} />
@@ -27,8 +29,8 @@ function App() {
   return (
     <>
       <ToastContainer 
-         position="bottom-right" 
-         autoClose={3000} 
+         position="top-right" 
+         autoClose={1500} 
          hideProgressBar={false} 
          newestOnTop={false} 
          closeOnClick 

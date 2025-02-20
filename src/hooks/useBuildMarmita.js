@@ -92,12 +92,13 @@ const useBuildMarmita = (tipoId) => {
 
         apiService.carrinhoAdicionarItem(marmitaDTO)
             .then(response => {
-                toast.success("Item adicionado ao carrinho.")
+                toast.success(response.data)
                 handleVoltar()
             })
             .catch(error => {
+                console.log(error.response)
                 if (error.response.data) {
-                    toast.error(error.response.data.message)
+                    toast.error(error.response.data)
                 } else {
                     toast.error("Ocorreu um erro.")
                 }
