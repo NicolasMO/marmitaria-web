@@ -55,6 +55,10 @@ class ApiService {
         return this.axiosInstance.post(`${apiConfig.carrinhoAdicionarItem}`, data);
     };
 
+    carrinhoRemoverItem(carrinhoId, produtoId) {
+        return this.axiosInstance.delete(`${apiConfig.carrinhoListarItens}/${carrinhoId}/${produtoId}`)
+    }
+
     carrinhoLimparCarrinho(carrinhoId) {
         return this.axiosInstance.delete(`${apiConfig.carrinhoListarItens}/${carrinhoId}`)
     }
