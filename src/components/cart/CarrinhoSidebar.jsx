@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
 import useAuth from "../../hooks/useAuth";
-import useCarrinho from "../../hooks/useCarrinho";
+import { CarrinhoContext } from "../../hooks/useCarrinho";
+import CarrinhoItem from "./CarrinhoItem";
 
 function CarrinhoSidebar() {
     const [show, setShow] = useState(false);
     const toggleCarrinho = () => setShow(!show);
-    const { carrinho, valorTotal, abrirCarrinho, removerProduto, limparCarrinho } = useCarrinho();
+    const { carrinho, valorTotal, abrirCarrinho, removerProduto, limparCarrinho } = useContext(CarrinhoContext);
     const { isAuthenticated } = useAuth();
    
     if (!isAuthenticated) {
@@ -46,18 +47,12 @@ function CarrinhoSidebar() {
                     ) : (
                         <>
                             {carrinho.map((item) => (
-                                <div className="cart-itens" key={item.id} style={{marginBottom: "10px"}}>
-                                    <div>
-                                        <strong>{item.produto.nome}</strong>
-                                        <p>
-                                            Qtd. {item.quantidade} - R$ {item.precoTotal.toFixed(2)}
-                                        </p>
-                                    </div>
-                                    <i className="bi bi-trash"
-                                        onClick={() => removerProduto(item.id)}
-                                        style={{ fontSize: "20px", color: "red", cursor: "pointer", marginRight: "10px", }}
-                                        title="Remover" />
-                                </div>
+                                <CarrinhoItem 
+                                    key={item.id}
+                                    carrinho={carrinho}
+                                    item={item}
+                                    removerProduto={removerProduto}
+                                />
                             ))}
 
                             <div className="cart-sidebar-options">

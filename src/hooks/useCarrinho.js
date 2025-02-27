@@ -1,10 +1,12 @@
 import { toast } from "react-toastify";
-import { useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import apiService from "../services/apiService";
 
-const useCarrinho = () => {
+export const CarrinhoContext = createContext();
+
+export const CarrinhoProvider = ({ children }) => {
     const [carrinho, setCarrinho] =  useState([]);
-    const [valorTotal, setValorTotal] = useState();
+    const [valorTotal, setValorTotal] = useState(0);
 
     //Busca o carrinho do usuário logado
     const abrirCarrinho = () => {
@@ -67,6 +69,43 @@ const useCarrinho = () => {
             });
     }
 
+    const atualizarQuantidadeProduto = (produtoId, novaQuantidade) => {
+        const usuarioId = localStorage.getItem("usuarioId");
+        const produtoDTO = {
+            usuarioId: usuarioId,
+            produtoId: produtoId,
+            quantidade: novaQuantidade
+        };
+        apiService.carrinhoAdicionarItem(produtoDTO)
+        .then(response => {
+            toast.success("Quantidade alterada.");
+            setCarrinho(prevCarrinho => {
+                const novoCarrinho = prevCarrinho.map(item => {
+                    if (item.produto.id === produtoId) {
+                        const novoPrecoTotal = item.produto.preco * novaQuantidade;
+                        return {
+                            ...item,
+                            quantidade: novaQuantidade,
+                            precoTotal: novoPrecoTotal
+                        };
+                    }
+                    return item;
+                })
+
+                const novoValorTotal = novoCarrinho.reduce((acc, item) => acc + item.precoTotal, 0);
+                setValorTotal(novoValorTotal);
+                return novoCarrinho;
+            })
+        })
+        .catch(error => {
+            if (error.response.data) {
+                toast.error(error.response.data);
+            } else {
+                toast.error("Ocorreu um erro.");
+            }
+        });   
+    }
+
     const limparCarrinho = () => {
         const carrinhoId = localStorage.getItem("usuarioCarrinho");
         if (carrinhoId != null) {
@@ -85,7 +124,14 @@ const useCarrinho = () => {
         };
     };
 
-    return { carrinho, valorTotal, abrirCarrinho, limparCarrinho, adicionarProduto, removerProduto }
+    return ( <CarrinhoContext.Provider value ={{ 
+            carrinho, valorTotal, abrirCarrinho, limparCarrinho,
+            adicionarProduto, removerProduto, atualizarQuantidadeProduto 
+            }}>
+            {children}
+        </CarrinhoContext.Provider>)
 }
 
-export default useCarrinho;
+export function useCarrinho() {
+    return useContext(CarrinhoContext);
+}

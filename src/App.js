@@ -6,6 +6,7 @@ import BuildMarmita from "./pages/BuildMarmita";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import CarrinhoSidebar from "./components/cart/CarrinhoSidebar";
+import { CarrinhoProvider } from "./hooks/useCarrinho";
 
 
 function Layout() {
@@ -39,9 +40,11 @@ function App() {
          draggable 
          pauseOnHover 
       />
-      <Router>
-        <Layout />
-      </Router>
+      <CarrinhoProvider>
+        <Router>
+          <Layout />
+        </Router>
+      </CarrinhoProvider>
     </>
   )
 }

@@ -81,8 +81,9 @@ const useBuildMarmita = (tipoId) => {
     };
 
     const handleMontarMarmita = () => {
+        const usuarioId = localStorage.getItem("usuarioId");
         const marmitaDTO = {
-            usuarioId: 2,
+            usuarioId: usuarioId,
             produtoId: tipoId,
             quantidade: 1,
             marmitaDTO: {

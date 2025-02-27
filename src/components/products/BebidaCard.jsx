@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, Button } from "react-bootstrap";
-import useCarrinho from "../../hooks/useCarrinho";
+import { CarrinhoContext } from "../../hooks/useCarrinho"
 
 function BebidaCard({ bebida }) {
-    const { adicionarProduto } = useCarrinho();
+    const { adicionarProduto } = useContext(CarrinhoContext);
     
     return (
         <Card className="card-bebida">
