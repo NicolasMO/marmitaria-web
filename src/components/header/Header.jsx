@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import "./Header.css";
 
 function Header() {
-    const { login, logout, isAuthenticated, token } = useAuth();
+    const { login, logout, isAuthenticated } = useAuth();
 
     const [email, setEmail] = React.useState("");
     const [senha, setSenha] = React.useState("");

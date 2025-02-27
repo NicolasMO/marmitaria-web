@@ -13,5 +13,6 @@ export default {
     ingredientesLimitesEndpoint: `${baseUrl}/ingredientes/limites`,
 
     // Carrinho
+    carrinhoListarItens: `${baseUrl}/carrinho`,
     carrinhoAdicionarItem: `${baseUrl}/carrinho/adicionar`,
 }

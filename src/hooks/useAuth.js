@@ -17,13 +17,9 @@ export default function useAuth() {
             localStorage.setItem("usuarioNome", data.usuarioNome);
             localStorage.setItem("usuarioCarrinho", data.carrinhoId);
             localStorage.setItem("usuarioId", data.usuarioId);
-            
-            toast.success("Usuário logado com sucesso.")
+            window.location.reload();
         } catch (error) {
             if (error) {
-                const errorMessage = error.response?.data?.message || "Ocorreu um erro.";
-                console.log(errorMessage)
-                console.log(error)
                 toast.error("Usuário ou senha inválidos.")
             } else {
                 toast.error("Ocorreu um erro.")

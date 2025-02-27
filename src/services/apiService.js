@@ -47,8 +47,20 @@ class ApiService {
         return this.axiosInstance.get(`${apiConfig.ingredientesLimitesEndpoint}/${produtoId}`);
     };
 
+    carrinhoListarItens(usuarioId) {
+        return this.axiosInstance.get(`${apiConfig.carrinhoListarItens}/${usuarioId}`);
+    };
+    
     carrinhoAdicionarItem(data) {
         return this.axiosInstance.post(`${apiConfig.carrinhoAdicionarItem}`, data);
+    };
+
+    carrinhoRemoverItem(carrinhoId, produtoId) {
+        return this.axiosInstance.delete(`${apiConfig.carrinhoListarItens}/${carrinhoId}/${produtoId}`)
+    }
+
+    carrinhoLimparCarrinho(carrinhoId) {
+        return this.axiosInstance.delete(`${apiConfig.carrinhoListarItens}/${carrinhoId}`)
     }
 }
 
